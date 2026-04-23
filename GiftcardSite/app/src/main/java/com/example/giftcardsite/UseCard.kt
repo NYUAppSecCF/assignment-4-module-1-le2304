@@ -35,7 +35,7 @@ class UseCard : AppCompatActivity() {
         Glide.with(this).asBitmap().load("https://appsec.moyix.net/" + card?.product?.productImageLink).into(image)
         val loggedInUser : User? = intent.getParcelableExtra("User")
         var token : String = "Token " + loggedInUser?.token.toString()
-        Log.d("Token check", token)
+        // Log.d("Token check", token)
         val outerContext = this
         var button: Button = findViewById(R.id.submit_buy)
         button.text = "Use Card"
@@ -59,7 +59,7 @@ class UseCard : AppCompatActivity() {
                     } else {
                         Log.d("Use Success", "Use success. Boo.")
                         Log.d("Use Success", "Card: ${card.toString()}")
-                        Log.d("Use Success", "Token:$token")
+                        // Log.d("Use Success", "Token:$token")
                     }
                     var intent = Intent(outerContext, ProductScrollingActivity::class.java)
                     //intent.type = "text/giftcards"
