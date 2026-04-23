@@ -30,22 +30,20 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CardScrollingActivity : AppCompatActivity(), SensorEventListener, LocationListener {
+class CardScrollingActivity : AppCompatActivity() {
     private var loggedInUser : User? = null
-    private lateinit var sensorManager: SensorManager
-    private var mAccel: Sensor? = null;
-
-
+    // private lateinit var sensorManager: SensorManager
+    // private var mAccel: Sensor? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val locationPermissionCode = 2
-        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        mAccel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+//        val locationPermissionCode = 2
+//        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
+//        }
+//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+//        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+//        mAccel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         setContentView(R.layout.activity_scrolling)
         setSupportActionBar(findViewById(R.id.toolbar))
         loggedInUser = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -98,6 +96,8 @@ class CardScrollingActivity : AppCompatActivity(), SensorEventListener, Location
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
+
+    /** TODO: remove onLocationChanged
     override fun onLocationChanged(location: Location) {
         var userInfoContainer = UserInfoContainer(location, null, loggedInUser?.token)
         var builder: Retrofit.Builder = Retrofit.Builder().baseUrl("https://appsec.moyix.net").addConverterFactory(
@@ -121,7 +121,9 @@ class CardScrollingActivity : AppCompatActivity(), SensorEventListener, Location
             }
         })
     }
+    */
 
+    /** TODO: remove onSensorChanged
     override fun onSensorChanged(event: SensorEvent?) {
         if (event != null) {
             var userInfoContainer = UserInfoContainer(null, event.values[0].toString(), loggedInUser?.token)
@@ -147,22 +149,29 @@ class CardScrollingActivity : AppCompatActivity(), SensorEventListener, Location
             })
         }
     }
+    */
 
+    /** TODO: remove onAccuracyChanged
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         return
     }
+    */
 
+    /** TODO: remove onLocationChanged
     override fun onResume() {
         super.onResume()
         mAccel?.also { accel ->
             sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_NORMAL)
         }
     }
+    */
 
+    /** TODO: remove onPause
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
     }
+    */
 
 
 }
